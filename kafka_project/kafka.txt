@@ -1,0 +1,45 @@
+zookeeper
+1)connect ssh
+2)update,sudo yum install java,version
+==kafka download==
+3)wget https://downloads.apache.org/kafka/3.8.1/kafka_2.12-3.8.1.tgz
+==checck==
+4)tar -xzf kafka_2.12-3.8.1.tgz
+5)sudo mv kafka_2.12-3.8.1 /usr/local/kafka
+6)cd /usr/local/kafka
+7)sudo nano config/server.properties
+==inside nano==
+8)advertised.listeners=PLAINTEXT://<your ip>:9092
+==ctrl x === for exit
+==zookeeper download==
+9)bin/zookeeper-server-start.sh config/zookeeper.properties
+
+===kafka bash====
+
+10)connech ssh
+11)cd /usr/local/kafka
+12)export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+13)bin/kafka-server-start.sh config/server.properties
+
+==producer bash==
+
+14)connect ssh
+15)cd /usr/local/kafka
+16)bin/kafka-topics.sh --create --topic kafka_project --bootstrap-server public ip:9092 --replication-factor 1 --partitions 1
+17)bin/kafka-console-producer.sh --topic kafka_project --bootstrap-server public ip:9092
+
+==consumer  bash==
+
+18)connect ssh
+19)cd /usr/local/kafka
+20)bin/kafka-console-consumer.sh --topic kafka_project --bootstrap-server public ip:9092
+
+==code===
+21)https://github.com/kscheneyder/kafka_project/blob/main/KafkaProducer.py
+22)https://github.com/kscheneyder/kafka_project/blob/main/KafkaConsumer.py
+23)s3 bucket 
+   policies
+	administrator access
+	access key
+
+ps aux | grep kafka
